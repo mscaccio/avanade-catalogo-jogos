@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Inserir Jogo";
+}
+
+<h1>Inserir jogo</h1>
+
+<form id="novoJogo">
+    <div class="form-group">
+        <label>Nome</label>
+        <div>
+            <input id="nome" name="nome" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Produtora</label>
+        <div>
+            <input id="produtora" name="produtora" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Preço</label>
+        <div>
+            <input id="preco" name="preco" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+    <button class="btn btn-primary">Salvar</button>
+</form>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                var formData = JSON.stringify({
+                    nome: $("#nome").val(),
+                    produtora: $("#produtora").val(),
+                    preco: $("#preco").val()
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/v1/jogos",
+                    data: formData,
+                    contentType: 'application/json'
+                })
+                    .done(function (data) {
+                        toastr.success("Jogos inserido com sucesso!");
+
+                        nome: $("#nome").val('');
+                        produtora: $("#produtora").val('');
+                        preco: $("#preco").val('');
+                    })
+                    .fail(function (error) {
+                        toastr.error(error.responseText);
+                    });
+
+                event.preventDefault();
+            });
+        });
+    </script>
+}

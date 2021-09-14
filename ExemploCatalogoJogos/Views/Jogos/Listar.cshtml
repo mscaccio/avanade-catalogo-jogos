@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Lista";
+}
+
+
+<h2>Jogos</h2>
+<p>
+    <a asp-controller="Jogos" asp-action="Inserir">Inserir Jogo</a>
+</p>
+
+<table id="jogos" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Produtora</th>
+            <th>Preço</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $('#jogos').DataTable({
+                ajax: {
+                    url: "/api/v1/jogos",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "nome",
+                        render: function (data, type, jogo) {
+                            return "<a href='/jogos/editar/" + jogo.id + "'>" + jogo.nome + "</a>";
+                        }
+                    },
+                    {
+                        data: "produtora"
+                    },
+                    {
+                        data: "preco"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-jogo-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#jogos").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Quer realmente remover o jogo?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/v1/jogos/" + button.attr("data-jogo-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}

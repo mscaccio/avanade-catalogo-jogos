@@ -1,0 +1,59 @@
+﻿@model ExemploApiCatalogoJogos.ViewModel.JogoViewModel
+
+@{
+    ViewBag.Title = "Editar Jogo";
+}
+
+<h1>Editar jogo</h1>
+
+<form id="novoJogo">
+    <div class="form-group">
+        <label>Nome</label>
+        <div>
+            <input id="nome" name="nome" required type="text" value="@Model.Nome" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Produtora</label>
+        <div>
+            <input id="produtora" name="produtora" required type="text" value="@Model.Produtora" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Preço</label>
+        <div>
+            <input id="preco" name="preco" required type="text" value=@Model.Preco class="form-control" />
+        </div>
+    </div>
+    <button class="btn btn-primary">Salvar</button>
+</form>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                var formData = JSON.stringify({
+                    nome: $("#nome").val(),
+                    produtora: $("#produtora").val(),
+                    preco: $("#preco").val()
+                });
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/v1/jogos/" + "@Model.Id",
+                    data: formData,
+                    contentType: 'application/json'
+                })
+                    .done(function (data) {
+                        toastr.success("Jogo atualizado com sucesso!");
+                    })
+                    .fail(function (error) {
+                        toastr.error(error.responseText);
+                    });
+
+                event.preventDefault();
+            });
+        });
+    </script>
+}
