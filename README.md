@@ -1,10 +1,10 @@
 # Avanade CodeAnywhere .NET
 
-## Desenvolva projetos .NET com C# em conjunto com os melhores experts da Avanade para ampliar o seu conhecimento, criar um portfólio inovador e conquistar grandes oportunidades
+## Develop .NET projects with C# together with the best Avanade experts to expand your knowledge, create an innovative portfolio and capture great opportunities
 
-### Criando um catálogo de jogos usando boas práticas de arquitetura com .NET 🎮
+### Creating a game catalog using .NET architecture best practices 🎮
 
-- Além da API para cadastrar jogos foi implementada uma página UI bem básica para consumir esta API. O projeto utiliza o plugin Datatable que trabalha com jQuery fazendo chamadas Ajax para enviar e trazer dados disponibilizando-os em uma tabela dinâmica. 
-- Foi demonstrado a utilização do plugin Toaster que apresenta uma notificação com mensagens de sucesso ou erro ao inserir ou editar jogos.
-- Os plugins foram importados via distribuição CDN.
-- Há dois perfis para escolher no momento de executar o projeto: IISExpress (página UI) e IISExpress API (Swagger).
+- In addition to the API for registering games, a very basic UI page was implemented to consume this API. The project uses the Datatable plugin that works with jQuery making Ajax calls to send and bring data making them available in a dynamic table. 
+- The use of the Toaster plugin has been demonstrated, which displays a success or error notification message when inserting or editing games.
+- Plugins were imported via CDN distribution.
+- There are two profiles to choose from when running the project: IISExpress (page UI) and IISExpress API (Swagger).
